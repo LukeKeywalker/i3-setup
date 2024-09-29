@@ -1,0 +1,73 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+
+general {
+        colors = true
+        interval = 3
+        color_good = "#b8bb26"
+        color_bad = "#fabd2f"
+        color_degraded = "#fb4934"
+        output_format = "i3bar"
+}
+
+#order += "ipv6"
+order += "load"
+order += "cpu_usage"
+order += "memory"
+order += "disk /"
+order += "wireless _first_"
+order += "ethernet _first_"
+order += "battery all"
+order += "tztime local"
+
+cpu_usage {
+        format = "%cpu0 %cpu1 %cpu2 %cpu3"
+        max_threshold = "90"
+        degraded_threshold ="50"
+}
+
+wireless _first_ {
+        format_up = "WIFI: %quality %essid %ip"
+        format_down = "WIFI: N/A"
+}
+
+ethernet _first_ {
+        # if you use %speed, i3status requires root privileges
+        format_up = "ETH: %ip"
+        format_down = "ETH: N/A"
+}
+
+battery all {
+        format = "%status %percentage %remaining ☠ %emptytime"
+        format_down = "No battery"
+        status_chr = "CHR: "
+        status_bat = "BAT: "
+        status_unk = "UNK: "
+        status_full = "☻ FULL"
+        low_threshold = 20
+}
+
+tztime local {
+#       format = "%Y-%m-%d %H:%M:%S"
+        format = "%Y-%m-%d %H:%M"
+}
+
+load {
+        format = "%15min %5min %1min"
+}
+
+disk "/" {
+        format = "HDD: %avail"
+}
+
+memory {
+	format = "RAM: %available"
+	threshold_degraded = "1024MB"
+	format_degraded = "LOW RAM: %available"
+}
